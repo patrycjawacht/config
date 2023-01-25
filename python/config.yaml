@@ -1,0 +1,60 @@
+run_list: [
+    {
+        'country': 'c1',
+        'table_suffix': 'xxxxxxx',
+        'suffixes' : ['xxxxxx1', 'xxxxxx2', 'xxxxxx3'],
+        'month': '2023-01',
+        'cutoff': 40,
+        'if_new': 'True',
+        'version': '',
+        'training_date': ''
+    }
+    ,
+    {
+        'country': 'c2',
+        'table_suffix': 'xxxxxxx',
+        'suffixes' : ['xxxxxx1', 'xxxxxx2', 'xxxxxx3'],
+        'month': '2023-01',
+        'cutoff': 50,
+        'if_new': 'True',
+        'version': '',
+        'training_date': ''
+    }
+]
+fulfill_template: {
+        'date_last_updated': None, 
+        'prepared_by': None,
+        'country': None,
+        'country': None,
+        'name': None,
+        'version': None,
+        'if_new': None,
+        'suffix_main': 'suffix_xxxx', 
+        'training_date': None,
+        'cutoff': None, 
+        'dataset_name': 'dxxxxxxxxxxxx0', 
+        'final_name': 'dxxxxxxxxxxxxxxd.xxxxx_RUN_SUFFIX', 
+        'n1_v1': 20, # hardcoded value, taken from n1
+        'n1_v2': 5, # hardcoded value
+        'n1_output_table_name': 'dxxxxxxxxxxxxxxp.xxxxx_RUN_SUFFIX', 
+        'contents': None,
+        'col_vals': None,
+        'n1_v3': None, 
+        'n1_v4': None, 
+        'n2_v1': None,
+        'n2_output_table_name': 'dxxxxxxxxxxxxxxp.xxxxx_RUN_SUFFIX', 
+        'n2_v2': 534, # hardcoded value
+        'n2_v3': 3, # hardcoded value
+        'n2_v4': 21, # hardcoded value
+        'n3_v1': None, 
+        'n3_v2': None,
+        'n3_v3': None,  
+        'n3_v4': None,  
+        'n3_v5': None,  
+        'n4_v1': None,  
+        'n4_v2': "replacement", 
+        'n4_v3': "replacement", 
+        'n4_v4': "replacement", 
+        'n4_v5': None,  
+        'n4_v6': None,  
+    }
