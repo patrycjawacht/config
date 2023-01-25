@@ -1,1 +1,5 @@
-papermill #==
+papermill
+google-cloud
+google-cloud-bigquery
+google-cloud-storage
+scikit-learn
