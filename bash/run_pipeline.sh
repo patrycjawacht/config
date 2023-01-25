@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# run the main pipeline. All the notebooks are hidden due to the data sensitivity.
 set -e
 set -u
 set -x
+
+source variables.sh
 
 # choose correct python
 alias python3=/usr/bin/python3
@@ -14,19 +17,17 @@ PY_DIR=${ROOT_DIR}/python
 
 # can be replaced by scripts if required:
 papermill ../python/n1.ipynb ../python/n1.ipynb
-papermill ../python/n2.ipynb ../python/n2.ipynb
-papermill ../python/n3.ipynb ../python/n3.ipynb
-papermill ../python/n4.ipynb ../python/n4.ipynb
+# papermill ../python/n2.ipynb ../python/n2.ipynb
+# papermill ../python/n3.ipynb ../python/n3.ipynb
+# papermill ../python/n4.ipynb ../python/n4.ipynb
 # papermill ../python/n5.ipynb ../python/n5.ipynb
 
-
-# autofulfill
+# download the autofulfill process from the GCS bucket
 gsutil cp gs://xxxx/autofull-main.zip ${BASH_DIR}
 echo "All no" | unzip ${BASH_DIR}/autofull-main.zip
 
 pip install -r ${BASH_DIR}/autofull-main/requirements.txt
 pip install ${BASH_DIR}/autofull-main/ds/autofull_upload-1.1.3-py3-none-any.whl
-
 
 # run the autofulfillment process, no input parameters required
 python3 ../python/run_autofull_doc.py 

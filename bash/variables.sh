@@ -4,5 +4,4 @@ set -e
 set -u
 set -x
 
-INPUT1=""
-INPUT2=""
+gcs_bucket="xxx"

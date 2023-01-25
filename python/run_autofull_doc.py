@@ -23,9 +23,15 @@ def initialize_gcs(
     project_id: str
 )->gcs.Client:
     """
-    arguments
-        project_id:
-    returns: gcs.Client
+    Initialize google cloud storage client
+    
+    Arguments:
+    ---------
+        project_id: project to initialize gcs client
+        
+    Returns:
+    -------
+        gcs Client
     """
     
     gcs_client = gcs.Client(
@@ -42,15 +48,21 @@ def upload_to_gcs(
     filenames: tp.List[str],
 )->None:
     """
-    arguments
-        gcs_client: 
-        gcs_bucket: 
-        gcs_folder_path: 
-        filenames: 
-    returns:
+    Append the filenames to gcs bucket
+    
+    Arguments:
+    ----------
+        gcs_client: initialized gcs client
+        gcs_bucket: gcs bucket to where save the files
+        gcs_folder_path: gcs bucket path structure to append the files
+        filenames: list of filenames to be appended to the gcs bucket
+        
+    Returns:
+    --------
         None
     """
     
+    # append file to gcs bucket
     for filename in filenames:
         
         bucket = gcs_client.bucket(gcs_bucket)
@@ -64,9 +76,19 @@ def upload_input_data(
     input_data_filename: str
 )->tp.List[tp.Dict[str, tp.Any]]:
     """
+    Open the input_data_filename yaml file
+    
+    Arguments:
+    ----------
+        input_data_filename: filename containing list of country and its data parameters 
+        to fulfill the word document with
+        
+    Returns:
+    --------
+        input_data: lists of dicionaries with country and its data 
     """
     
-    # load the yaml file with input parameters for autodock
+    # load the yaml file with input parameters for autofill
     with open(f'{PYTHON_PATH}/{input_data_filename}') as rf:
         input_data = yaml.safe_load(rf)
     
@@ -79,10 +101,21 @@ def save_output_data(
     doc_template_file: tp.Optional[str]='for_test.docx'
 )->None:
     """
+    Render the data parameters and fulfill the word document
+    
+    Arguments:
+    ----------
+        gcs_client:
+        input_data_dict:
+        doc_template_file:
+        
+    Returns:
+    --------
+        None
     """
     filenames=[]
 
-    # for each lob, rendering context/data into template
+    # for each country, rendering context/data into template
     for country_data in input_data_dict:
         
         doc = WordDocument(f'{PYTHON_PATH}/{doc_template_file}')
@@ -107,6 +140,7 @@ def save_output_data(
     
 if __name__ == '__main__':
     """
+    Fulfill the word document with provided parameters
     """
     
     FORMAT = '%(asctime)s %(message)s'
@@ -115,14 +149,17 @@ if __name__ == '__main__':
         format=FORMAT
     )
     
+    # initliazie gcs
     gcs_client = initialize_gcs(
         project_id = 'xxx'
     )
     
+    # get the input data
     input_data = upload_input_data(
         input_data_filename = 'fulfill_params.json'
     ) 
     
+    # save created files to gcs bucket
     save_output_data(
         input_data_dict = input_data,
         gcs_client = gcs_client

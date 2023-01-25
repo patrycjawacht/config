@@ -1,3 +1,5 @@
+# gathering all the libraries that might be useful for the project
+#
 papermill
 google-cloud
 google-cloud-bigquery

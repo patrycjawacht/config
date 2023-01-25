@@ -4,7 +4,8 @@ set -e
 set -u 
 set -x
 
-source variables.sh
+# bash file to activate the kernel and install it to the jupyter notebook
+
 echo "Initialize new kernel"
 
 KERNEL_NAME="2023_kernel"
